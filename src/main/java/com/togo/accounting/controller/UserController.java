@@ -1,8 +1,7 @@
 package com.togo.accounting.controller;
 
-import com.sun.tools.corba.se.idl.ExceptionEntry;
 import com.togo.accounting.converter.c2s.UserInfoC2SConverter;
-import com.togo.accounting.exception.ErrorException;
+import com.togo.accounting.exception.ErrorResponse;
 import com.togo.accounting.exception.ResourceNotFoundException;
 import com.togo.accounting.exception.ServiceException;
 import com.togo.accounting.manager.UserInfoManager;
@@ -35,27 +34,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUserInfoByUserId(@PathVariable("id") Long userId) {
-        try {
+    public ResponseEntity<UserInfo> getUserInfoByUserId(@PathVariable("id") Long userId) {
             val userInfo = userInfoManager.getUserInfoByUserId(userId);
             return ResponseEntity.ok(userInfoC2SConverter.convert(userInfo));
-        } catch (ResourceNotFoundException ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body(ErrorException.builder()
-                                                     .code("NOT_FOUND")
-                                                     .errorType(ServiceException.errorType.Client)
-                                                     .statusCode(HttpStatus.NOT_FOUND.value())
-                                                     .message(ex.getMessage())
-                                                     .build());
-                }
-
-        /**
-         * {
-         *     "code": "NOT_FOUND",
-         *     "errorType": "Client",
-         *     "message": "User 1000 was not found",
-         *     "statusCode": 404
-         * }
-         * */
     }
 }
