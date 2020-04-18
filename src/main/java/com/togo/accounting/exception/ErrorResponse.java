@@ -11,7 +11,7 @@ import lombok.Data;
 @Builder
 public class ErrorResponse {
     private String code;
-    private ServiceException.errorType errorType;
+    private ServiceException.ErrorType errorType;
     private String message;
     private int statusCode;
 }

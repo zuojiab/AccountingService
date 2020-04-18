@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException ex){
         val errorResponse = ErrorResponse.builder()
                                          .code("USER_NOT_FOUND")
-                                         .errorType(ServiceException.errorType.Client)
+                                         .errorType(ServiceException.ErrorType.Client)
                                          .message(ex.getMessage())
                                          .statusCode(ex.getStatusCode())
                                          .build();
@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BadRequestException.class)
-    ResponseEntity<?> handleBadRequestException(ResourceNotFoundException ex){
+    ResponseEntity<?> handleBadRequestException(BadRequestException ex){
         val errorResponse = ErrorResponse.builder()
                                          .code(ex.getErrorCode())
                                          .errorType(ex.getErrorType())

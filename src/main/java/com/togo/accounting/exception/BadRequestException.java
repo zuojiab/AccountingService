@@ -3,6 +3,7 @@ package com.togo.accounting.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+
 /**
  * @Description
  * @create 2020-04-18 22:32
@@ -13,5 +14,6 @@ public class BadRequestException extends ServiceException{
         super(message);
         this.setStatusCode(HttpStatus.BAD_REQUEST.value());
         this.setErrorCode("USER_INFO_INVALID");
+        this.setErrorType(ErrorType.Client);
     }
 }

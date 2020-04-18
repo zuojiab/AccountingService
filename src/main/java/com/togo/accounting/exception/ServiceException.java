@@ -10,9 +10,9 @@ import lombok.Data;
 public class ServiceException extends RuntimeException {
     private int statusCode;
     private String errorCode; //biz error code
-    private ServiceException.errorType errorType;//client,service,unknown
+    private ErrorType errorType;//client,service,unknown
 
-    public enum errorType{
+    public enum ErrorType {
         Client,
         Service,
         Unknown
