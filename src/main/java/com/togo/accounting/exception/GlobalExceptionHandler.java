@@ -18,9 +18,22 @@ public class GlobalExceptionHandler {
                                          .code("USER_NOT_FOUND")
                                          .errorType(ServiceException.errorType.Client)
                                          .message(ex.getMessage())
-                                         .statusCode(HttpStatus.NOT_FOUND.value())
+                                         .statusCode(ex.getStatusCode())
                                          .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                             .body(errorResponse);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    ResponseEntity<?> handleBadRequestException(ResourceNotFoundException ex){
+        val errorResponse = ErrorResponse.builder()
+                                         .code(ex.getErrorCode())
+                                         .errorType(ex.getErrorType())
+                                         .message(ex.getMessage())
+                                         .statusCode(ex.getStatusCode())
+                                         .build();
+        return ResponseEntity.status(ex.getStatusCode() != 0 ? ex.getStatusCode()
+                                                             : HttpStatus.INTERNAL_SERVER_ERROR.value())
                              .body(errorResponse);
     }
 }

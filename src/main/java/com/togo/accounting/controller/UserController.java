@@ -1,6 +1,7 @@
 package com.togo.accounting.controller;
 
 import com.togo.accounting.converter.c2s.UserInfoC2SConverter;
+import com.togo.accounting.exception.BadRequestException;
 import com.togo.accounting.exception.ErrorResponse;
 import com.togo.accounting.exception.ResourceNotFoundException;
 import com.togo.accounting.exception.ServiceException;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Objects;
 
 
 /**
@@ -35,7 +38,10 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserInfo> getUserInfoByUserId(@PathVariable("id") Long userId) {
-            val userInfo = userInfoManager.getUserInfoByUserId(userId);
-            return ResponseEntity.ok(userInfoC2SConverter.convert(userInfo));
+        if (userId <= 0L || userId == null){
+            throw new BadRequestException(String.format("The user id %s is invalid.",userId));
+        }
+        val userInfo = userInfoManager.getUserInfoByUserId(userId);
+        return ResponseEntity.ok(Objects.requireNonNull(userInfoC2SConverter.convert(userInfo)));
     }
 }
