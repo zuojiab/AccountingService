@@ -2,6 +2,7 @@ package com.togo.accounting.exception;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 /**
  * @Description
