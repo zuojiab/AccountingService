@@ -1,12 +1,12 @@
 package com.togo.accounting.converter.c2s;
 
-import com.google.common.base.Converter;
 import com.togo.accounting.model.common.UserInfo;
-import lombok.EqualsAndHashCode;
+
+import com.google.common.base.Converter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
+
 
 @Component
 @NoArgsConstructor

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * @Description
- * @create 2020-04-14 21:27
- **/
+ * GlobalExceptionHandler
+ * create by crashLab.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceException.class)
-    ResponseEntity<?> handleServiceException(ServiceException ex){
+    ResponseEntity<?> handleServiceException(ServiceException ex) {
         val errorResponse = ErrorResponse.builder()
                                          .code(ex.getErrorCode())
                                          .errorType(ex.getErrorType())

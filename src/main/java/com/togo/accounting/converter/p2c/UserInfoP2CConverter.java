@@ -1,8 +1,8 @@
 package com.togo.accounting.converter.p2c;
 
+import com.togo.accounting.model.persistence.UserInfo;
 
 import com.google.common.base.Converter;
-import com.togo.accounting.model.persistence.UserInfo;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 

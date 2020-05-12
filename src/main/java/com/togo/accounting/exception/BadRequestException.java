@@ -5,11 +5,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 /**
- * @Description
- * @create 2020-04-18 22:32
- **/
+ *
+ * create by crashLab.
+ */
 @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class BadRequestException extends ServiceException{
+public class BadRequestException extends ServiceException {
+    /**
+     *
+     * create by crashLab.
+     */
     public BadRequestException(String message) {
         super(message);
         this.setStatusCode(HttpStatus.BAD_REQUEST.value());

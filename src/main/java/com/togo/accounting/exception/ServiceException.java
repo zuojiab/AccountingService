@@ -3,9 +3,9 @@ package com.togo.accounting.exception;
 import lombok.Data;
 
 /**
- * @Description service exception.
- * @create 2020-04-13 04:01
- **/
+ * service exception.
+ * create by crashLab.
+ */
 @Data
 public class ServiceException extends RuntimeException {
     private int statusCode;

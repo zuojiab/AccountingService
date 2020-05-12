@@ -1,14 +1,15 @@
 package com.togo.accounting.dao.mapper;
 
 import com.togo.accounting.model.persistence.UserInfo;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
- * @Description
- * @create 2020-04-12 19:02
- **/
+ * userInfo mapper
+ * create by crashLab.
+ */
 @Mapper
 public interface UserInfoMapper {
 
