@@ -5,6 +5,7 @@ import com.togo.accounting.exception.BadRequestException;
 import com.togo.accounting.manager.UserInfoManager;
 import com.togo.accounting.model.service.UserInfo;
 
+
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -34,15 +35,16 @@ public class UserController {
     }
 
     /**
-     *
      * create by crashLab.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UserInfo> getUserInfoByUserId(@PathVariable("id") Long userId) {
-        if (userId <= 0L || userId == null) {
-            throw new BadRequestException(String.format("The user id %s is invalid.",userId));
+    public ResponseEntity<UserInfo> getUserInfoByUserId(@PathVariable("id") @NotNull Long userId) {
+        if (userId <= 0L) {
+            throw new BadRequestException(String.format("The user id %s is invalid.", userId));
         }
         val userInfo = userInfoManager.getUserInfoByUserId(userId);
-        return ResponseEntity.ok(Objects.requireNonNull(userInfoC2SConverter.convert(userInfo)));
+        val userInfoToReturn = userInfoC2SConverter.convert(userInfo);
+        assert userInfoToReturn != null;
+        return ResponseEntity.ok(userInfoToReturn);
     }
 }

@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -87,19 +88,20 @@ public class UserControllerTest {
     }
 
     @Test
-    void testGetUserInfoByUserIdWithInvalidUserId() throws Exception{
+    void testGetUserInfoByInvalidUserId() throws Exception{
         val userId = -100L;
 
-        doThrow(new ResourceNotFoundException(String.format("User %s was not found",userId)))
-                .when(userInfoManager)
-                .getUserInfoByUserId(anyLong());
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1.0/users/"+userId))
-               .andExpect(status().is4xxClientError())
-               .andExpect(content().string("{\"code\":\"USER_INFO_INVALID\",\"errorType\":\"Client\",\"message\":\"The user id -100 is invalid.\",\"statusCode\":400}"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/v1.0/users/"+userId)
+                                                    .contentType("application/json")
+                                                    .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().is4xxClientError())
+            .andExpect(content().contentType("application/json"))
+            .andExpect(content().string("{\"code\":\"USER_INFO_INVALID\",\"errorType\":\"Client\",\"message\":\"The user id -100 is invalid.\",\"statusCode\":400}"));
 
         verify(userInfoManager,never()).getUserInfoByUserId(anyLong());
 
 
     }
+
+
 }

@@ -2,7 +2,11 @@ package com.togo.accounting.converter.c2s;
 
 import com.togo.accounting.model.common.UserInfo;
 
+
+import javax.validation.constraints.NotNull;
+
 import com.google.common.base.Converter;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +14,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class UserInfoC2SConverter extends Converter<UserInfo, com.togo.accounting.model.service.UserInfo> {
 
     @Override
-    protected com.togo.accounting.model.service.UserInfo doForward(UserInfo userInfo) {
+    protected com.togo.accounting.model.service.UserInfo doForward(@NotNull UserInfo userInfo) {
         return com.togo.accounting.model.service.UserInfo.builder()
                                                  .id(userInfo.getId())
                                                  .username(userInfo.getUsername())
@@ -21,7 +26,7 @@ public class UserInfoC2SConverter extends Converter<UserInfo, com.togo.accountin
     }
 
     @Override
-    protected UserInfo doBackward(com.togo.accounting.model.service.UserInfo userInfo) {
+    protected UserInfo doBackward(@NotNull com.togo.accounting.model.service.UserInfo userInfo) {
         return UserInfo.builder()
                        .id(userInfo.getId())
                        .username(userInfo.getUsername())
