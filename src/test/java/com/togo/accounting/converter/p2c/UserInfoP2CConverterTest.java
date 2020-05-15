@@ -24,7 +24,7 @@ public class UserInfoP2CConverterTest {
                                     .id(userId)
                                     .username(username)
                                     .password(password)
-                                    .createTime(createTime)
+                                    .create_time(createTime)
                                     .build();
 
         //Act

@@ -17,13 +17,20 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
     private final UserInfoMapper userInfoMapper;
 
-    //    @Autowired
-    //    public UserInfoDaoImpl(UserInfoMapper userInfoMapper) {
-    //        this.userInfoMapper = userInfoMapper;
-    //    }
-
     @Override
     public UserInfo getUserInfoByUserId(Long userId) {
         return userInfoMapper.getUserInfoByUserId(userId);
     }
+
+    @Override
+    public UserInfo getUserInfoByUserName(String username) {
+        return userInfoMapper.getUserInfoByUserName(username);
+    }
+
+    @Override
+    public void createUser(UserInfo userInfo) {
+        userInfoMapper.createNewUser(userInfo);
+    }
+
+
 }

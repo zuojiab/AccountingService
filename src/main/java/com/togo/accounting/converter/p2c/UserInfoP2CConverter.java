@@ -31,6 +31,7 @@ public class UserInfoP2CConverter extends Converter<UserInfo, com.togo.accountin
                        .id(userInfo.getId())
                        .username(userInfo.getUsername())
                        .password(userInfo.getPassword())
+                       .salt(userInfo.getSalt())
                        .build();
     }
 }

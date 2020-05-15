@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserInfoDao {
     UserInfo getUserInfoByUserId(Long userId);
+    UserInfo getUserInfoByUserName(String username);
+    void createUser(UserInfo userInfo);
 }
