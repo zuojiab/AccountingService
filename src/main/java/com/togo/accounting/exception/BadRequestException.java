@@ -17,7 +17,7 @@ public class BadRequestException extends ServiceException {
     public BadRequestException(String message) {
         super(message);
         this.setStatusCode(HttpStatus.BAD_REQUEST.value());
-        this.setErrorCode("USER_INFO_INVALID");
+        this.setErrorCode(BizErrorCode.INVALID_PARAMETER );
         this.setErrorType(ErrorType.Client);
     }
 }

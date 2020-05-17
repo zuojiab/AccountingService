@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ServiceException extends RuntimeException {
     private int statusCode;
-    private String errorCode; //biz error code
+    private BizErrorCode errorCode; //biz error code
     private ErrorType errorType;//client,service,unknown
 
     public enum ErrorType {

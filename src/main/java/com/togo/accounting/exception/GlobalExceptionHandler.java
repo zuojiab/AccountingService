@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     ResponseEntity<?> handleServiceException(ServiceException ex) {
         val errorResponse = ErrorResponse.builder()
-                                         .code(ex.getErrorCode())
+                                         .code(BizErrorCode.INVALID_PARAMETER)
                                          .errorType(ex.getErrorType())
                                          .message(ex.getMessage())
                                          .statusCode(ex.getStatusCode())
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IncorrectCredentialsException.class)
     ResponseEntity<?> handleServiceException(IncorrectCredentialsException ex) {
         val errorResponse = ErrorResponse.builder()
-                                         .code("INCORRECT_CREDENTIALS")
+                                         .code(BizErrorCode.INCORRECT_CREDENTIALS)
                                          .errorType(ServiceException.ErrorType.Client)
                                          .message(ex.getMessage())
                                          .statusCode(HttpStatus.BAD_REQUEST.value())
